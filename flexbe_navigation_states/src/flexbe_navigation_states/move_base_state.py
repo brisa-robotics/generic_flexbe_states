@@ -73,7 +73,7 @@ class MoveBaseState(EventState):
         goal.target_pose.pose = Pose(position = pt,
                                      orientation = Quaternion(*qt))
 
-        goal.target_pose.header.frame_id = "odom"
+        goal.target_pose.header.frame_id = "map"
         # goal.target_pose.header.stamp.secs = 5.0
 
         # Send the action goal for execution
@@ -82,7 +82,7 @@ class MoveBaseState(EventState):
         except Exception as e:
             Logger.logwarn("Unable to send navigation action goal:\n%s" % str(e))
             self._failed = True
-            
+
     def cancel_active_goals(self):
         if self._client.is_available(self._action_topic):
             if self._client.is_active(self._action_topic):
